@@ -31,3 +31,6 @@
 [submodule "vim/bundle/vim-puppet"]
 	path = vim/bundle/vim-puppet
 	url = git://github.com/rodjek/vim-puppet.git
+[submodule "vim/bundle/vim-stylus"]
+	path = vim/bundle/vim-stylus
+	url = git://github.com/wavded/vim-stylus.git
