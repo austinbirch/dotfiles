@@ -1,0 +1,11 @@
+/Users/austin/dotfiles/vim/vimrc
+/Users/austin/dotfiles/vimrc
+/Users/austin/Development/provisioning/bloc/puppet/manifests/base.pp
+/Users/austin/dotfiles/.git/config
+/Users/austin/dotfiles/.gitmodules
+/Users/austin/dotfiles/vim/.gitmodules
+/Users/austin/dotfiles/vim/.gitignore
+/Users/austin/vim-config/tmp/README.md
+/Users/austin/vim-config/vimrc
+/var/folders/ml/pbdlr8254hg30k50z10v9tm40000gn/T/v8XOu02/8
+/Users/austin/vim-config/README.md

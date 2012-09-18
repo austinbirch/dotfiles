@@ -1,0 +1,114 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" Bundles
+
+" Manage vundle (required)
+Bundle 'gmarik/vundle'
+
+" colorschemes
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'sjl/badwolf'
+
+" file navigation
+Bundle 'kien/ctrlp.vim'
+
+" text navigation/editing
+Bundle 'tpope/vim-surround'
+Bundle 'scrooloose/nerdcommenter'
+
+" language specific
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'wavded/vim-stylus'
+Bundle 'nono/vim-handlebars'
+Bundle 'groenewege/vim-less'
+Bundle 'rodjek/vim-puppet'
+
+filetype plugin indent on
+
+if has("gui_running")
+  set guioptions=-t " no toolbar
+  set fullscreen " big please
+  colorscheme badwolf
+else
+  let g:solarized_termcolors=256
+  let g:solarized_termtrans=1
+  set background=dark
+  colorscheme solarized
+endif
+
+set modelines=0 " we don't want this. See :h modelines
+
+syntax enable " we want syntax higlighting
+
+set expandtab " use spaces for tabs
+set tabstop=2 " tabs are 2 spaces
+set shiftwidth=2 " 2 spaces for autoindent etc
+set autoindent " try and guess the indent level
+set smartindent " probably better for me than cindent
+set scrolloff=5 " show five lines extra at bottom and top
+
+set hidden " allow modified buffers to not be in a window
+set showmode " show which mode we are in
+
+set wildmenu " bettercommand line filename completion
+set wildmode=list:longest " wild menu options
+set wildignore+=.hg,.git,.svn " version control
+set wildignore+=*.DS_store " OS X ergh
+
+set textwidth=80 " 80 character limit
+set wrap " wrap please
+set formatoptions=qrn1
+set colorcolumn=+1 " highlight the 81st column
+
+set splitright " vertical split to the right
+set splitbelow " horizonal splits open below
+
+set visualbell " less annoying bell
+set cursorline " higlight the line the cursor is resting on
+set ttyfast " we are using a fast terminal connection (probably!)
+set ruler " show line number, cursor position, and file position
+set backspace=indent,eol,start " more normal backspace handling
+set laststatus=2 " always show a status line
+set number " show line numbers
+set undofile  " persistant undo
+set history=1000 " lots of command history
+set undolevels=1000 " lots of undo history
+set encoding=utf-8 " vim text display encoding (?)
+"set spell " show spelling errors
+set guifont=Menlo:h11 " set our font
+
+" search settings
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> &
+noremap H ^
+noremap L g_
+
+let mapleader = "," " our leader key
+let maplocalleader = "\\" " localleader
+
+" ctrlp settings
+let g:ctrlp_working_path_mode = 2
+let g:ctrlp_map = '<leader>t'
+let g:ctrlp_switch_buffer = 2 " switch to buffer if it is open
+let g:ctrlp_cache_dir = '~/.vim/tmp'
+" uses git to list files
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
+
+" temporary file handling
+set undodir=~/.vim/tmp/
+set backupdir=~/.vim/tmp/
+set directory=~/.vim/tmp/
+set backup
