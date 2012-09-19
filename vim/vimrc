@@ -27,6 +27,9 @@ Bundle 'nono/vim-handlebars'
 Bundle 'groenewege/vim-less'
 Bundle 'rodjek/vim-puppet'
 
+" nicer status bar
+Bundle 'Lokaltog/vim-powerline'
+
 filetype plugin indent on
 
 if has("gui_running")
@@ -79,7 +82,9 @@ set history=1000 " lots of command history
 set undolevels=1000 " lots of undo history
 set encoding=utf-8 " vim text display encoding (?)
 "set spell " show spelling errors
-set guifont=Menlo:h11 " set our font
+
+let g:Powerline_symbols = 'fancy'
+set guifont=Menlo\ Regular\ for\ Powerline:h11
 
 " search settings
 nnoremap / /\v
