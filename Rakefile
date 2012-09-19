@@ -12,7 +12,8 @@ task :link_dotfiles do
     'tmux.conf',
     'zshrc',
     'vim',
-    'oh-my-zsh'
+    'oh-my-zsh',
+    'custom'
   ]
 
   files.each do |file|
