@@ -40,3 +40,6 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = git://github.com/gmarik/vundle.git
+[submodule "vim/bundle/vim-powerline"]
+	path = vim/bundle/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
