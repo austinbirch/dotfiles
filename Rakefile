@@ -60,5 +60,5 @@ namespace :fonts do
 end
 
 task :default => 'dotfiles:link'
-task :all => [':dotfiles:install', ':fonts:install']
+task :all => ['dotfiles:link', 'fonts:install']
 
