@@ -1,9 +1,6 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule "custom/tmux/tmux-powerline"]
-	path = custom/tmux/tmux-powerline
-	url = git://github.com/erikw/tmux-powerline.git
 [submodule "vim/bundle/badwolf"]
 	path = vim/bundle/badwolf
 	url = https://github.com/sjl/badwolf
