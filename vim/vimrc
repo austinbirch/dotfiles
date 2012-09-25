@@ -108,7 +108,7 @@ let maplocalleader = "\\" " localleader
 " ctrlp settings
 let g:ctrlp_working_path_mode = 2
 let g:ctrlp_map = '<leader>t'
-let g:ctrlp_switch_buffer = 2 " switch to buffer if it is open
+let g:ctrlp_switch_buffer = 'etvh' " switch to buffer if it is open
 let g:ctrlp_cache_dir = '~/.vim/tmp'
 " uses git to list files
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
