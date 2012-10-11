@@ -1,0 +1,14 @@
+[user]
+	name = Austin Birch
+	email = mraustinbirch@gmail.com
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /Users/austin/.gitignore_global
+[alias]
+  lol = log --graph --decorate
+  lola = log --graph --decorate --abbrev-commit --all
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
