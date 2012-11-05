@@ -40,3 +40,6 @@
 [submodule "vim/bundle/vim-powerline"]
 	path = vim/bundle/vim-powerline
 	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "osx-lion-terminal.app-colors-solarized"]
+	path = osx-lion-terminal.app-colors-solarized
+	url = git://github.com/tomislav/osx-lion-terminal.app-colors-solarized.git
