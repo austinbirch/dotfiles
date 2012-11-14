@@ -44,6 +44,9 @@ EDITOR=vim
 
 # aliases
 alias bt='brunch test'
+alias speedtest="curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip"
+
+alias gds='git diff --staged'
 
 # For access to npm modules
 export NODE_PATH=/usr/local/lib/node_modules
