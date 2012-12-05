@@ -1,0 +1,1 @@
+0 17 * * * /usr/local/bin/tarsnap-backup development /Users/austin/Development > /var/log/tarsnap-backup-development.log

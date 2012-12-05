@@ -1,0 +1,6 @@
+To get tarsnap running (MAC OS X):
+
+- install tarsnap via 'brew install tarsnap'
+- move tarsnap-backup into '/usr/local/bin/'
+- create cron job ('sudo crontab -e') with the contents of 'cron'
+- make sure '/usr/local/bin' is in your PATH
