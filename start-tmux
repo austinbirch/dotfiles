@@ -1,0 +1,22 @@
+#!/bin/sh
+tmux new-session -d -s normal
+
+tmux rename-window -t normal:1 'localhost'
+tmux new-window -t normal:2 -n 'staging'
+
+# setup local window panes
+tmux select-window -t normal:1
+tmux split-window -h -p 50
+tmux select-pane -L
+tmux split-window -v -p 50
+tmux select-pane -U
+
+# setup panes for staging window
+tmux select-window -t normal:2
+tmux split-window -h -p 50
+tmux select-pane -L
+tmux split-window -v -p 50
+tmux select-pane -U
+
+tmux select-window -t normal:1
+tmux -2 attach-session -t normal
