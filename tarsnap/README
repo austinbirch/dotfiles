@@ -1,6 +1,11 @@
 To get tarsnap running (MAC OS X):
 
+BEFORE MOVING MACHINE:
+- make sure you have a backup of the tarsnap key!
+
+Reconfigure:
 - install tarsnap via 'brew install tarsnap'
 - move tarsnap-backup into '/usr/local/bin/'
 - create cron job ('sudo crontab -e') with the contents of 'cron'
 - make sure '/usr/local/bin' is in your PATH
+- ensure that the tarsnap key is in the correct place (check tarsnap.conf)
