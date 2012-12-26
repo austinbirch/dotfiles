@@ -3,6 +3,7 @@ tmux new-session -d -s normal
 
 tmux rename-window -t normal:1 'localhost'
 tmux new-window -t normal:2 -n 'staging'
+tmux new-window -t normal:3 -n 'emacs'
 
 # setup local window panes
 tmux select-window -t normal:1
