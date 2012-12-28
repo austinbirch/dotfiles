@@ -16,7 +16,10 @@
 
 (when window-system
   (tool-bar-mode -1)
-  (set-frame-size (selected-frame) 116 54))
+  (scroll-bar-mode -1)
+  (set-frame-size (selected-frame) 116 54)
+  (set-fringe-style -1)
+  (tooltip-mode -1))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -69,13 +72,10 @@ region\) apply comment-or-uncomment to the current line"
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (delete-selection-mode t)
-(scroll-bar-mode -1)
 (blink-cursor-mode t)
 (show-paren-mode t)
 (global-linum-mode 1)
 (column-number-mode t)
-(set-fringe-style -1)
-(tooltip-mode -1)
 (setq visible-bell t)
 
 (set-frame-font "Menlo-12")
