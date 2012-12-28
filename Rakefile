@@ -42,7 +42,8 @@ namespace :dotfiles do
       'vim',
       'oh-my-zsh',
       'custom',
-      'gitconfig'
+      'gitconfig',
+      'emacs.d'
     ]
 
     files.each do |file|
