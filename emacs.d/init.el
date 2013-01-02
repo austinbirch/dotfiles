@@ -31,7 +31,7 @@
 ;; list of packages to be installed via MELPA
 (defvar package-list
   '(clojure-mode sws-mode stylus-mode jade-mode
-    markdown-mode paredit sass-mode scss-mode ))
+                 markdown-mode paredit sass-mode scss-mode))
 
 (defun packages-installed-p ()
   (loop for p in package-list
