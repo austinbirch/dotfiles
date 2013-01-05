@@ -31,7 +31,8 @@
 ;; list of packages to be installed via MELPA
 (defvar package-list
   '(clojure-mode sws-mode stylus-mode jade-mode
-                 markdown-mode paredit sass-mode scss-mode))
+                 markdown-mode paredit sass-mode scss-mode
+                 coffee-mode handlebars-mode))
 
 (defun packages-installed-p ()
   (loop for p in package-list
@@ -60,6 +61,14 @@
   (set-fringe-style -1)
   (tooltip-mode -1))
 
+;; backup file handling
+(setq
+ backup-directory-alist '(("." . "~/.emacs.d/tmp"))
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t)
+
 ;; TextMate minor mode for find-in-project etc
 ;; (add-to-list 'load-path "~/.emacs.d/vendor/")
 ;; (require 'textmate)
@@ -82,6 +91,16 @@
 ;; adjustments for css mode
 (setq css-indent-offset 2)
 
+;; adjustments for js mode
+(setq js-indent-level 2)
+
+;; mode for coffee-script
+(require 'coffee-mode)
+(custom-set-variables '(coffee-tab-width 2))
+
+;; handlebars
+(require 'handlebars-mode)
+
 ;; inferior-lisp for clojure
 (add-to-list 'exec-path "/usr/local/bin")
 (setq inferior-lisp-program "lein repl")
@@ -103,7 +122,7 @@ region\) apply comment-or-uncomment to the current line"
       (if (< (point) (mark))
           (comment-or-uncomment-region (point) (mark))
         (comment-or-uncomment-region (mark) (point)))))
-(global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region-or-line)
 
 ;; keyboard bindings for switching windows
 (global-set-key (kbd "C-c h") 'windmove-left)
@@ -120,7 +139,7 @@ region\) apply comment-or-uncomment to the current line"
 ;; whitespace-mode ------------------------------------------------------------
 ;; display only trails of lines longer than 80 columns, tabs, and
 ;; trailing whitespaces
-(setq whitespace-line-column 90
+(setq whitespace-line-column 80
       whitespace-style '(face tabs trailing lines-tail))
 
 ;; face for long lines tails
@@ -137,6 +156,7 @@ region\) apply comment-or-uncomment to the current line"
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
 ;; activate minor whitespace-mode
 (whitespace-mode 1)
+(global-whitespace-mode 1)
 
 ;; some saner settings
 (setq make-backup-files nil)
