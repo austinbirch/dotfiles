@@ -40,7 +40,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
 # editor of my choice..
 EDITOR=vim
@@ -50,6 +50,7 @@ alias bt='brunch test'
 alias speedtest="curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip"
 
 alias gds='git diff --staged'
+alias eemacs='open -a /Applications/Emacs.app $1'
 
 # For access to npm modules
 export NODE_PATH=/usr/local/lib/node_modules
