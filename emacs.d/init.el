@@ -30,9 +30,8 @@
 
 ;; list of packages to be installed via MELPA
 (defvar package-list
-  '(clojure-mode sws-mode stylus-mode jade-mode
-                 markdown-mode paredit sass-mode scss-mode
-                 coffee-mode handlebars-mode))
+  '(clojure-mode markdown-mode paredit sass-mode scss-mode
+                 coffee-mode handlebars-mode slime auto-complete))
 
 (defun packages-installed-p ()
   (loop for p in package-list
@@ -61,9 +60,45 @@
   (set-fringe-style -1)
   (tooltip-mode -1))
 
+;; some saner settings
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+(setq-default tab-width 2)
+(defvaralias 'c-basic-offset 'tab-width)
+(setq-default indent-tabs-mode nil)
+(setq inhibit-startup-message t)
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; more normal scrolling
+(setq scroll-step 1
+      scroll-margin 5
+      scroll-conservatively 10000)
+
+(delete-selection-mode t)
+(blink-cursor-mode t)
+(show-paren-mode t)
+(global-linum-mode 1)
+(column-number-mode t)
+(setq visible-bell t)
+
+(set-frame-font "Menlo-12")
+
+;; ido-mode for fuzzy finding etx
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+(setq ido-create-new-buffer 'always)
+(setq ido-auto-merge-work-directories-length -1)
+
 ;; backup file handling
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+(custom-set-variables
+  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
+  '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
+
 (setq
- backup-directory-alist '(("." . "~/.emacs.d/tmp"))
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
@@ -74,13 +109,37 @@
 ;; (require 'textmate)
 ;; (textmate-mode)
 
+;; auto-complete mode for stuff other than minibuffer
+;; (require 'auto-complete)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+;; (add-to-list 'ac-modes 'coffee-mode)
+
+;; highlight the current line; set a custom face, so we can
+;; recognize from the normal marking (selection)
+(defface hl-line '((t (:background "Gray")))
+  "Face to use for `hl-line-face'." :group 'hl-line)
+(setq hl-line-face 'hl-line)
+(global-hl-line-mode t) ; turn it on for all modes by default
+
 ;; mode for Jade and Stylus
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/jade-mode"))
-(require 'sws-mode)
-(require 'jade-mode)
+;; (require 'sws-mode)
+;; (require 'jade-mode)
+;; (require 'stylus-mode)
+;; (add-to-list 'auto-mode-alist '("\\.styl$" . stylus-mode))
+;; (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+;; (setq sws-tab-width 2)
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/stylus-mode"))
 (require 'stylus-mode)
 (add-to-list 'auto-mode-alist '("\\.styl$" . stylus-mode))
-(add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+(add-hook 'stylus-mode-hook
+          (function (lambda ()
+                      (setq indent-tabs-mode nil
+                            tab-width 2))))
 
 ;; mode for SCSS
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/scss-mode"))
@@ -103,10 +162,23 @@
 
 ;; inferior-lisp for clojure
 (add-to-list 'exec-path "/usr/local/bin")
-(setq inferior-lisp-program "lein repl")
+;; (setq inferior-lisp-program "lein repl")
+
+;; inferior-lisp for clisp
+(setq inferior-lisp-program "clisp")
 
 ;; settings for plt-racket (scheme)
 (setq scheme-program-name "mzscheme")
+
+;; more sane beginning of line stuff
+(defun beginning-of-line-or-indentation ()
+  "move to beginning of line, or indentation"
+  (interactive)
+  (if (bolp)
+      (back-to-indentation)
+    (beginning-of-line)))
+(global-set-key [home] 'beginning-of-line-or-indentation)
+(global-set-key "\C-a" 'beginning-of-line-or-indentation)
 
 ;; comment-or-uncomment-region-or-line
 ; it's almost the same as in textmate.el but I wrote it before I know about
@@ -157,31 +229,6 @@ region\) apply comment-or-uncomment to the current line"
 ;; activate minor whitespace-mode
 (whitespace-mode 1)
 (global-whitespace-mode 1)
-
-;; some saner settings
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-(setq-default tab-width 2)
-(defvaralias 'c-basic-offset 'tab-width)
-(setq-default indent-tabs-mode nil)
-(setq inhibit-startup-message t)
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(delete-selection-mode t)
-(blink-cursor-mode t)
-(show-paren-mode t)
-(global-linum-mode 1)
-(column-number-mode t)
-(setq visible-bell t)
-
-(set-frame-font "Menlo-12")
-
-;; ido-mode for fuzzy finding etx
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-(setq ido-create-new-buffer 'always)
-(setq ido-auto-merge-work-directories-length -1)
 
 ;; we should use clojure-mode for clojurescript
 (setq auto-mode-alist (cons '("\\.cljs" . clojure-mode) auto-mode-alist))
