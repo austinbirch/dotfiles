@@ -1,23 +1,34 @@
 #!/bin/sh
-tmux new-session -d -s normal
+SESSION=$USER
 
-tmux rename-window -t normal:1 'localhost'
-tmux new-window -t normal:2 -n 'staging'
-tmux new-window -t normal:3 -n 'emacs'
+# check we don't already have a session to attach to
+tmux has-session -t $SESSION
+if [ $? -eq 0 ]; then
+    echo "tmux session $SESSION already exists, attaching to it now"
+    sleep 1
+    tmux attach -t $SESSION
+    exit 0
+fi
+
+tmux new-session -d -s $SESSION
+
+tmux rename-window -t $SESSION:1 'localhost'
+tmux new-window -t $SESSION:2 -n 'staging'
+tmux new-window -t $SESSION:3 -n 'emacs'
 
 # setup local window panes
-tmux select-window -t normal:1
+tmux select-window -t $SESSION:1
 tmux split-window -h -p 50
 tmux select-pane -L
 tmux split-window -v -p 50
 tmux select-pane -U
 
 # setup panes for staging window
-tmux select-window -t normal:2
+tmux select-window -t $SESSION:2
 tmux split-window -h -p 50
 tmux select-pane -L
 tmux split-window -v -p 50
 tmux select-pane -U
 
-tmux select-window -t normal:1
-tmux -2 attach-session -t normal
+tmux select-window -t $SESSION:1
+tmux -2 attach-session -t $SESSION
