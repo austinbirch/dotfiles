@@ -57,3 +57,10 @@ alias eemacs='open -a /Applications/Emacs.app $1'
 
 # For access to npm modules
 export NODE_PATH=/usr/local/lib/node_modules
+
+# Java home
+export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+
+# node-canvas / cairo stuff
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig
