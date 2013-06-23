@@ -14,7 +14,8 @@ tmux new-session -d -s $SESSION
 
 tmux rename-window -t $SESSION:1 'localhost'
 tmux new-window -t $SESSION:2 -n 'staging'
-tmux new-window -t $SESSION:3 -n 'emacs'
+tmux new-window -t $SESSION:3 -n 'irssi'
+tmux new-window -t $SESSION:4 -n 'emacs'
 
 # setup local window panes
 tmux select-window -t $SESSION:1
@@ -28,6 +29,10 @@ tmux select-pane -L
 #tmux select-pane -L
 #tmux split-window -v -p 50
 #tmux select-pane -U
+
+# run irssi in correct pane
+tmux select-window -t $SESSION:3
+tmux send-keys 'irssi' 'C-m'
 
 tmux select-window -t $SESSION:1
 tmux -2 attach-session -t $SESSION
