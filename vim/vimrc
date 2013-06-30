@@ -12,6 +12,7 @@ Bundle 'gmarik/vundle'
 " colorschemes
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/badwolf'
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
 
 " file navigation
 Bundle 'kien/ctrlp.vim'
@@ -19,13 +20,15 @@ Bundle 'kien/ctrlp.vim'
 " text navigation/editing
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdcommenter'
+"Bundle 'Townk/vim-autoclose'
+Bundle 'Raimondi/delimitMate'
 
 " language specific
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'wavded/vim-stylus'
 Bundle 'nono/vim-handlebars'
 Bundle 'groenewege/vim-less'
-Bundle 'rodjek/vim-puppet'
+Bundle 'wookiehangover/jshint.vim'
 
 " nicer status bar
 Bundle 'Lokaltog/vim-powerline'
@@ -35,7 +38,10 @@ filetype plugin indent on
 if has("gui_running")
   set guioptions=-t " no toolbar
   set fullscreen " big please
-  colorscheme badwolf
+  "colorscheme badwolf
+  "set background=dark
+  "colorscheme solarized
+  colorscheme Tomorrow-Night
 else
   set t_Co=256
   let g:solarized_termcolors=256
@@ -52,16 +58,23 @@ set expandtab " use spaces for tabs
 set tabstop=2 " tabs are 2 spaces
 set shiftwidth=2 " 2 spaces for autoindent etc
 set autoindent " try and guess the indent level
-set smartindent " probably better for me than cindent
+"set smartindent " probably better for me than cindent
 set scrolloff=5 " show five lines extra at bottom and top
+
+" code folding
+"set foldmethod=syntax
+"set foldnestmax=1
+
+" expand indentation when CR
+let delimitMate_expand_cr = 1
 
 set hidden " allow modified buffers to not be in a window
 set showmode " show which mode we are in
 
 set wildmenu " bettercommand line filename completion
 set wildmode=list:longest " wild menu options
-set wildignore+=.hg,.git,.svn " version control
-set wildignore+=*.DS_store " OS X ergh
+set wildignore+=.hg,.git,.svn,build,.sass-cache,.DS_Store "
+"set wildignore+=*.DS_store " OS X ergh
 
 set textwidth=80 " 80 character limit
 set wrap " wrap please
@@ -105,13 +118,41 @@ vnoremap <tab> &
 noremap H ^
 noremap L g_
 
+" whitespace handling
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+autocmd BufWritePre *.py,*.js,*.rb,*.coffee :call <SID>StripTrailingWhitespaces()
+
+highlight ExtraWhitespace ctermbg=red guibg=DarkRed
+match ExtraWhitespace /\s\+$/
+
+
 " ctrlp settings
 let g:ctrlp_working_path_mode = 2
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_switch_buffer = 'etvh' " switch to buffer if it is open
 let g:ctrlp_cache_dir = '~/.vim/tmp'
 " uses git to list files
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
+"let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files --exclude-standard -co']
+"let g:ctrlp_custom_ignore = {
+  "\ 'dir':  '\v\.(git|hg|svn)',
+  "\ 'file': '\v\.(exe|so|dll)$',
+  "\ 'link': 'some_bad_symbolic_links',
+  "\ }
+
+let g:ctrlp_working_path_mode = 0
+"let g:ctrlp_user_command = 'find %s -follow -type f'
+let g:ctrlp_user_command = "find %s -follow -type f | grep -vE 'node_modules|.git|.sass-cache|.DS_Store'"
 
 " temporary file handling
 set undodir=~/.vim/tmp/
