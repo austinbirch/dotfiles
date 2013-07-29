@@ -149,11 +149,38 @@ endfunction
 
 autocmd BufWritePre *.py,*.js,*.rb,*.coffee :call <SID>StripTrailingWhitespaces()
 
-highlight ExtraWhitespace ctermbg=red guibg=DarkRed
-match ExtraWhitespace /\s\+$/
+" shell command so we can get output
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+  echo a:cmdline
+  let expanded_cmdline = a:cmdline
+  for part in split(a:cmdline, ' ')
+     if part[0] =~ '\v[%#<]'
+        let expanded_part = fnameescape(expand(part))
+        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+     endif
+  endfor
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:    ' . a:cmdline)
+  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
+  call setline(3,substitute(getline(2),'.','=','g'))
+  execute '$read !'. expanded_cmdline
+  setlocal nomodifiable
+  1
+endfunction
 
+"highlight ExtraWhitespace ctermbg=red guibg=DarkRed
+"match ExtraWhitespace /\s\+$/
 
-" ctrlp settings
+" Highlight trailing whitespace in vim on non empty lines, but not while
+" typing in insert mode!
+highlight ExtraWhitespace ctermbg=red guibg=Brown
+au ColorScheme * highlight ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\S\zs\s\+$/
+au InsertEnter * match ExtraWhitespace /\S\zs\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\S\zs\s\+$/
+
 let g:ctrlp_working_path_mode = 2
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_switch_buffer = 'etvh' " switch to buffer if it is open
@@ -168,7 +195,7 @@ let g:ctrlp_cache_dir = '~/.vim/tmp'
 
 let g:ctrlp_working_path_mode = 0
 "let g:ctrlp_user_command = 'find %s -follow -type f'
-let g:ctrlp_user_command = "find %s -follow -type f | grep -vE 'node_modules|.git|.sass-cache|.DS_Store'"
+let g:ctrlp_user_command = "find %s -follow -type f | grep -vE 'node_modules|.git|.sass-cache|build/|.DS_Store'"
 
 " temporary file handling
 set undodir=~/.vim/tmp/
