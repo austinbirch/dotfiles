@@ -55,11 +55,26 @@ set modelines=0 " we don't want this. See :h modelines
 
 syntax enable " we want syntax higlighting
 
-set expandtab " use spaces for tabs
-set tabstop=2 " tabs are 2 spaces
-set shiftwidth=2 " 2 spaces for autoindent etc
-set autoindent " try and guess the indent level
+" old tab settings (spaces)
+"set expandtab " use spaces for tabs
+"set tabstop=2 " tabs are 2 spaces
+"set shiftwidth=2 " 2 spaces for autoindent etc
+"set autoindent " try and guess the indent level
 "set smartindent " probably better for me than cindent
+
+set smartindent
+set noexpandtab
+set tabstop=2
+set shiftwidth=2
+
+" show tabs
+set list
+set listchars=tab:▸\ ,eol:¬
+highlight SpecialKey guifg=Grey19 ctermfg=LightGray
+
+" toggle tabs if we want to
+nmap <leader>l :set list!<CR>
+
 set scrolloff=5 " show five lines extra at bottom and top
 
 " code folding
