@@ -28,6 +28,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'wavded/vim-stylus'
 Bundle 'nono/vim-handlebars'
 Bundle 'groenewege/vim-less'
+Bundle 'StanAngeloff/php.vim'
 Bundle 'wookiehangover/jshint.vim'
 
 " nicer status bar
