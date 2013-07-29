@@ -4,6 +4,7 @@
 [core]
 	editor = /usr/bin/vim
 	excludesfile = /Users/austin/.gitignore_global
+	pager = less -x2
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
