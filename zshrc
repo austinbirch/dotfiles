@@ -42,6 +42,9 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
+# use homebrew install php5.4
+export PATH="$(brew --prefix josegonzalez/php/php54)/bin:$PATH"
+
 # rbenv
 eval "$(rbenv init -)"
 
@@ -64,3 +67,6 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 # node-canvas / cairo stuff
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
