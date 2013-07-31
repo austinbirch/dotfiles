@@ -40,6 +40,7 @@ namespace :dotfiles do
       'tmux.conf',
       'zshrc',
       'vim',
+			'irssi',
       'oh-my-zsh',
       'custom',
       'gitconfig',
