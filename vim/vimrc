@@ -38,7 +38,7 @@ filetype plugin indent on
 
 if has("gui_running")
   set guioptions=-t " no toolbar
-  set fullscreen " big please
+  "set fullscreen " big please
   "colorscheme badwolf
   "set background=dark
   "colorscheme solarized
