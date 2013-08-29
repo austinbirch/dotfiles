@@ -43,10 +43,10 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
 # use homebrew install php5.4
-export PATH="$(brew --prefix josegonzalez/php/php54)/bin:$PATH"
+#export PATH="$(brew --prefix josegonzalez/php/php54)/bin:$PATH"
 
 # rbenv
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 # editor of my choice..
 EDITOR=vim
@@ -59,14 +59,7 @@ alias gds='git diff --staged'
 alias eemacs='open -a /Applications/Emacs.app $1'
 
 # For access to npm modules
-export NODE_PATH=/usr/local/lib/node_modules
+#export NODE_PATH=/usr/local/lib/node_modules
 
 # Java home
-export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
-
-# node-canvas / cairo stuff
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+#export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
