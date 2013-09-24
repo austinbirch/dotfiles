@@ -1,6 +1,6 @@
 [user]
 	name = Austin Birch
-	email = mraustinbirch@gmail.com
+	email = austin@akkroo.com
 [core]
 	editor = /usr/bin/vim
 	excludesfile = /Users/austin/.gitignore_global
@@ -15,3 +15,12 @@
   status = auto
 [push]
 	default = matching
+[mergetool]
+	keepBackup = true
+
+[merge]
+tool = splice
+
+[mergetool "splice"]
+cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+trustExitCode = true
