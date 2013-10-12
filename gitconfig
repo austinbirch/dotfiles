@@ -5,9 +5,11 @@
 	editor = /usr/bin/vim
 	excludesfile = /Users/austin/.gitignore_global
 	pager = less -x2
+	ignorecase = false
 [alias]
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	pfetch = fetch --prune
 [color]
   branch = auto
   diff = auto
