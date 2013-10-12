@@ -14,8 +14,15 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/badwolf'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
 
+" git help
+Bundle 'sjl/splice.vim'
+Bundle 'tpope/vim-fugitive'
+
 " file navigation
 Bundle 'kien/ctrlp.vim'
+
+" file searching
+Bundle 'mileszs/ack.vim'
 
 " text navigation/editing
 Bundle 'tpope/vim-surround'
@@ -23,13 +30,22 @@ Bundle 'scrooloose/nerdcommenter'
 "Bundle 'Townk/vim-autoclose'
 Bundle 'Raimondi/delimitMate'
 
+" language generic
+Bundle 'scrooloose/syntastic'
+
 " language specific
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'wavded/vim-stylus'
 Bundle 'nono/vim-handlebars'
 Bundle 'groenewege/vim-less'
+"Bundle 'wookiehangover/jshint.vim'
+Bundle 'jtratner/vim-flavored-markdown'
+
+" php
 Bundle 'StanAngeloff/php.vim'
-Bundle 'wookiehangover/jshint.vim'
+Bundle 'xolox/vim-misc'
+Bundle 'xolox/vim-easytags'
+" look in gui_running for debugger include
 
 " nicer status bar
 Bundle 'Lokaltog/vim-powerline'
@@ -37,12 +53,20 @@ Bundle 'Lokaltog/vim-powerline'
 filetype plugin indent on
 
 if has("gui_running")
+	" only load PHP debugger on gui
+	Bundle 'joonty/vdebug'
+	let g:vdebug_options = {}
+	let g:vdebug_options['break_on_open'] = 0
+	let g:vdebug_options['path_maps'] = {'/home/vagrant/Akkroo': '/Users/austin/Development/Akkroo/Akkroo'}
+	
   set guioptions=-t " no toolbar
   "set fullscreen " big please
   "colorscheme badwolf
-  "set background=dark
-  "colorscheme solarized
-  colorscheme Tomorrow-Night
+	"set background=dark
+	colorscheme solarized
+	"colorscheme Tomorrow-Night
+	
+	let g:solarized_italic=0
 else
   set t_Co=256
   let g:solarized_termcolors=256
@@ -67,10 +91,16 @@ set noexpandtab
 set tabstop=2
 set shiftwidth=2
 
+" use spaces for indentation with YAML"
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 " show tabs
 set list
+"set listchars=tab:▸\ ,eol:¬,trail:.
 set listchars=tab:▸\ ,eol:¬
-highlight SpecialKey guifg=Grey19 ctermfg=LightGray
+highlight SpecialKey guifg=grey90 ctermfg=LightGray guibg=NONE
+highlight NonText guifg=grey90 ctermfg=LightGray guibg=NONE
+
 
 " toggle tabs if we want to
 nmap <leader>l :set list!<CR>
@@ -117,7 +147,7 @@ let g:Powerline_symbols = 'fancy'
 set guifont=Menlo\ Regular\ for\ Powerline:h11
 
 let mapleader = "," " our leader key
-let maplocalleader = "\\" " localleader
+"let maplocalleader = "\\" " localleader
 
 " search settings
 nnoremap / /\v
@@ -147,7 +177,8 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-autocmd BufWritePre *.py,*.js,*.rb,*.coffee :call <SID>StripTrailingWhitespaces()
+" disable for now
+"autocmd BufWritePre *.py,*.js,*.rb,*.coffee :call <SID>StripTrailingWhitespaces()
 
 " shell command so we can get output
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
@@ -170,13 +201,19 @@ function! s:RunShellCommand(cmdline)
   1
 endfunction
 
+" use github flavour markdown by default
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+
 "highlight ExtraWhitespace ctermbg=red guibg=DarkRed
 "match ExtraWhitespace /\s\+$/
 
 " Highlight trailing whitespace in vim on non empty lines, but not while
 " typing in insert mode!
-highlight ExtraWhitespace ctermbg=red guibg=Brown
-au ColorScheme * highlight ExtraWhitespace guibg=red
+highlight ExtraWhitespace ctermbg=Brown guibg=RosyBrown
+au ColorScheme * highlight ExtraWhitespace guibg=RosyBrown
 au BufEnter * match ExtraWhitespace /\S\zs\s\+$/
 au InsertEnter * match ExtraWhitespace /\S\zs\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\S\zs\s\+$/
@@ -196,6 +233,10 @@ let g:ctrlp_cache_dir = '~/.vim/tmp'
 let g:ctrlp_working_path_mode = 0
 "let g:ctrlp_user_command = 'find %s -follow -type f'
 let g:ctrlp_user_command = "find %s -follow -type f | grep -vE 'node_modules|.git|.sass-cache|build/|.DS_Store'"
+
+" syntax checking and linting
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
 
 " temporary file handling
 set undodir=~/.vim/tmp/
