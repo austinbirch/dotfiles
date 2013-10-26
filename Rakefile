@@ -44,6 +44,7 @@ namespace :dotfiles do
       'oh-my-zsh',
       'custom',
       'gitconfig',
+			'gitignore',
       'emacs.d'
     ]
 
