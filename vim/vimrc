@@ -9,6 +9,10 @@ call vundle#rc()
 " Manage vundle (required)
 Bundle 'gmarik/vundle'
 
+" utilities
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+
 " colorschemes
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'sjl/badwolf'
@@ -32,6 +36,8 @@ Bundle 'Raimondi/delimitMate'
 
 " language generic
 Bundle 'scrooloose/syntastic'
+Bundle "garbas/vim-snipmate"
+Bundle "austinbirch/vim-snippets"
 
 " language specific
 Bundle 'kchmck/vim-coffee-script'
@@ -54,10 +60,10 @@ filetype plugin indent on
 
 if has("gui_running")
 	" only load PHP debugger on gui
-	Bundle 'joonty/vdebug'
-	let g:vdebug_options = {}
-	let g:vdebug_options['break_on_open'] = 0
-	let g:vdebug_options['path_maps'] = {'/home/vagrant/Akkroo': '/Users/austin/Development/Akkroo/Akkroo'}
+	"Bundle 'joonty/vdebug'
+	"let g:vdebug_options = {}
+	"let g:vdebug_options['break_on_open'] = 0
+	"let g:vdebug_options['path_maps'] = {'/home/vagrant/Akkroo': '/Users/austin/Development/Akkroo/Akkroo'}
 	
   set guioptions=-t " no toolbar
   "set fullscreen " big please
@@ -235,6 +241,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = "find %s -follow -type f | grep -vE 'node_modules|.git|.sass-cache|build/|.DS_Store'"
 
 " syntax checking and linting
+let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
 

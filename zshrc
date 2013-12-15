@@ -52,6 +52,7 @@ eval "$(rbenv init -)"
 EDITOR=vim
 
 # aliases
+alias bex='bundle exec'
 alias bt='brunch test'
 alias speedtest="curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip"
 
