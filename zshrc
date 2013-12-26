@@ -60,6 +60,8 @@ alias gds='git diff --staged'
 alias eemacs='open -a /Applications/Emacs.app $1'
 alias cds='cd ~/Development/Akkroo/AkkrooDevServer/'
 alias cda='cd ~/Development/Akkroo/Akkroo/'
+alias lca='lein cljsbuild auto'
+alias lrs='lein ring server-headless'
 
 # For access to npm modules
 export NODE_PATH=/usr/local/lib/node_modules
