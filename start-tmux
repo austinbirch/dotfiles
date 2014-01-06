@@ -15,7 +15,7 @@ tmux new-session -d -s $SESSION
 tmux rename-window -t $SESSION:1 'localhost'
 tmux new-window -t $SESSION:2 -n 'staging'
 tmux new-window -t $SESSION:3 -n 'irssi'
-tmux new-window -t $SESSION:4 -n 'emacs'
+tmux new-window -t $SESSION:4 -n 'mbb'
 
 # setup local window panes
 tmux select-window -t $SESSION:1
