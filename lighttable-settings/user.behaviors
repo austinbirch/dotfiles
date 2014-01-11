@@ -26,7 +26,8 @@
               (:lt.objs.editor/tab-settings false 2 2)]
 
      ;; Here we can add behaviors to just clojure editors
-     :editor.clojure [(:lt.objs.langs.clj/print-length 1000)]}
+     :editor.clojure [(:lt.objs.langs.clj/print-length 1000)]
+     :editor.html [(:lt.objs.editor/tab-settings false 2 2)]}
 
  ;; You can use the subtract key to remove behavior that may get added by
  ;; another diff
