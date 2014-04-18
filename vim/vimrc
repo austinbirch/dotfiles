@@ -93,7 +93,7 @@ syntax enable " we want syntax higlighting
 "set smartindent " probably better for me than cindent
 
 set smartindent
-set noexpandtab
+set expandtab
 set tabstop=2
 set shiftwidth=2
 

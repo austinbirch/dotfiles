@@ -19,9 +19,11 @@
 
      :editor {"alt-w" [:editor.watch.watch-selection]
               "alt-shift-w" [:editor.watch.unwatch]
+              "alt-enter" [(:paredit.select.parent "(")
+                           :eval-editor-form
+                           :paredit.select.clear]
               "pmeta-/" [:toggle-comment-selection]
               "pmeta-shift-i" [:editor.doc.toggle]
-              "shift-=" [:smart-indent-selection]
               "ctrl-c" [:clear-inline-results]
               "pmeta-c" [:editor.copy]
               "pmeta-x" [:editor.cut]
@@ -30,4 +32,19 @@
               "pmeta-shift-z" [:editor.redo]
               "pmeta-f" [:vim.find]
               "pmeta-g" [:find.next]
-              "pmeta-shift-g" [:find.prev]}}}
+              "pmeta-shift-g" [:find.prev]}
+
+     :editor.keys.vim.normal {"cmd-d" [:editor.doc.toggle]
+                              "e" [:toggle-console]
+                              "shift-alt-s" [(:paredit.select.parent "(")]
+                              "alt-s" [(:paredit.select.parent "(")
+                                       :smart-indent-selection
+                                       :paredit.select.clear]
+                              ">" [:paredit.grow.right]
+                              "<" [:paredit.shrink.right]
+                              "alt-shift-," [:paredit.shrink.left]
+                              "alt-shift-." [:paredit.grow.left]}
+     :editor.keys.vim.visual {"(" [:paredit.select.parent]
+                              "shift-=" [:smart-indent-selection]}
+
+     :editor.keys.vim.insert {"tab" [:auto-complete]}}}

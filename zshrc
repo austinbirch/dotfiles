@@ -64,6 +64,9 @@ alias lca='lein cljsbuild auto'
 alias lcca='lein cljsbuild clean && lein cljsbuild auto'
 alias lrs='lein ring server-headless'
 
+# for developing on node-webkit
+alias nw="/Applications/node-webkit.app/Contents/MacOS/node-webkit"
+
 # For access to npm modules
 export NODE_PATH=/usr/local/lib/node_modules
 

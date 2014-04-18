@@ -17,12 +17,12 @@
   status = auto
 [push]
 	default = matching
-[mergetool]
-	keepBackup = true
-
+[mergetool "mvimdiff"]
+  cmd = /usr/local/bin/mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
 [merge]
-tool = splice
-
-[mergetool "splice"]
-cmd = "mvim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-trustExitCode = true
+	tool = mvimdiff
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
